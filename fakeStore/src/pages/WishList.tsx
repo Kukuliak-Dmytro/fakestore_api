@@ -19,7 +19,7 @@ export default function WishList() {
             <div className="wish-list-hero w-full h-48 bg-gray-500 flex justify-center items-center">
                 <h1 className="text-white text-3xl">WishList</h1>
             </div>
-            <ProductList products={products}></ProductList>
+            <ProductList products={products} itemsPerPage={9}></ProductList>
         </div>
     )
 }

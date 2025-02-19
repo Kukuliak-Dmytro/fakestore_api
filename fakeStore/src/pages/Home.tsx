@@ -34,7 +34,7 @@ export default function Home() {
 
             </form>
             <div className="product-list-home p-10 bg-gray-100">
-                <ProductList products={products} ></ProductList>
+                <ProductList products={products} itemsPerPage={9} ></ProductList>
             </div>
 
         </div>

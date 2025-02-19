@@ -6,26 +6,30 @@ import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
-export default function ProductList({ products }: { products: ProductType[]}) {
+
+export default function ProductList({ products, itemsPerPage }: { products: ProductType[], itemsPerPage:number }) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [productsPerPage, setProductsPerPage] = useState(9);
+    const [productsPerPage, setProductsPerPage] = useState(itemsPerPage);
     const currentPage = parseInt(searchParams.get("page") || "1", 10);
     const indexOfLastProduct = currentPage * productsPerPage;
     const currentProducts = products.slice(indexOfLastProduct - productsPerPage, indexOfLastProduct);
     const totalPages = Math.ceil(products.length / productsPerPage);
-    const  favorites = useSelector((state: RootState) => state.user.user.wishlistIds);
+    const favorites = useSelector((state: RootState) => state.user.user.wishlistIds);
 
-    const dispatch=useDispatch()
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        setSearchParams({ page: currentPage.toString() });
-    }, [currentPage, setSearchParams]);
+        const newSearchParams = new URLSearchParams(searchParams);
+        newSearchParams.set("page", currentPage.toString());
+        setSearchParams(newSearchParams);
+    }, [currentPage, searchParams, setSearchParams]);
 
     return (
         <div className="product-list-wrapper grid ">
-            <div className={`flex flex-wrap gap-4 justify-center`}>
+            <div className={`flex flex-wrap gap-4 justify-center `}>
                 {currentProducts.map((product) => {
                     if (favorites.includes(product.id)) {
-                        return <ProductCard  key={product.id}product={product} dispatch={dispatch} isCurrentItemFavorited={true} />;
+                        return <ProductCard key={product.id} product={product} dispatch={dispatch} isCurrentItemFavorited={true} />;
                     } else {
                         return <ProductCard key={product.id} product={product} dispatch={dispatch} isCurrentItemFavorited={false} />;
                     }
