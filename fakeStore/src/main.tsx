@@ -6,6 +6,7 @@ import Login from './pages/Login.tsx'
 import { store } from './state/store.ts'
 import { Provider } from 'react-redux'
 import Home from './pages/Home.tsx'
+import WishList from './pages/WishList.tsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -18,7 +19,9 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login />
-      }
+      },
+      {path:'/wishlist',
+        element:<WishList/>}
     ]
   }
 ])

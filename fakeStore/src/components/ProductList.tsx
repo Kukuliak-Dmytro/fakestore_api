@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "../state/store";
-export default function ProductList({ products, columns }: { products: ProductType[], columns: "2" | "3" | "4" }) {
+export default function ProductList({ products }: { products: ProductType[]}) {
     const [searchParams, setSearchParams] = useSearchParams();
     const [productsPerPage, setProductsPerPage] = useState(9);
     const currentPage = parseInt(searchParams.get("page") || "1", 10);
@@ -25,9 +25,9 @@ export default function ProductList({ products, columns }: { products: ProductTy
             <div className={`flex flex-wrap gap-4 justify-center`}>
                 {currentProducts.map((product) => {
                     if (favorites.includes(product.id)) {
-                        return <ProductCard product={product} dispatch={dispatch} isCurrentItemFavorited={true} />;
+                        return <ProductCard  key={product.id}product={product} dispatch={dispatch} isCurrentItemFavorited={true} />;
                     } else {
-                        return <ProductCard product={product} dispatch={dispatch} isCurrentItemFavorited={false} />;
+                        return <ProductCard key={product.id} product={product} dispatch={dispatch} isCurrentItemFavorited={false} />;
                     }
                 })}
             </div>

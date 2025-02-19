@@ -34,7 +34,7 @@ export default function Home() {
 
             </form>
             <div className="product-list-home p-10 bg-gray-100">
-                <ProductList products={products} columns="3"></ProductList>
+                <ProductList products={products} ></ProductList>
             </div>
 
         </div>

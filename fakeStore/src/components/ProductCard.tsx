@@ -6,7 +6,7 @@ export default function ProductCard({ product, dispatch, isCurrentItemFavorited}
 
 
     return (
-        <div key={product.id} className='bg-white p-6 w-1/4  flex flex-col  items-center rounded-md justify-between'>
+        <div className='bg-white p-6 w-1/4  flex flex-col  items-center rounded-md justify-between'>
             <img className=' h-48 ' src={product.image} alt={product.title} />
             <h1 className='text-lg font-bold'>{product.title}</h1>
             <p className='text-sm'>{product.description}</p>
