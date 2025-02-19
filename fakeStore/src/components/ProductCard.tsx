@@ -1,8 +1,10 @@
 import { ProductType } from "../types/types";
 import Button from "./Button";
-import { addWishlistItem } from "../state/userSlice";
-export default function ProductCard({ product, dispatch }: { product: ProductType,dispatch:any }) {
- 
+import { addWishlistItem,removeWishlistItem } from "../state/userSlice";
+
+export default function ProductCard({ product, dispatch, isCurrentItemFavorited}: { product: ProductType,dispatch:any , isCurrentItemFavorited:boolean}) {
+
+
     return (
         <div key={product.id} className='bg-white p-6 w-1/4  flex flex-col  items-center rounded-md justify-between'>
             <img className=' h-48 ' src={product.image} alt={product.title} />
@@ -21,7 +23,12 @@ export default function ProductCard({ product, dispatch }: { product: ProductTyp
             </span>
             <span className="flex justify-between w-full items-center">
                 <p className='text-sm font-bold'>${product.price}</p>
-                <Button  onClick={()=>dispatch(addWishlistItem(product.id))}>Add to wishlist</Button>
+                
+              {isCurrentItemFavorited ? (
+                <button  className='p-2 text-white bg-red-500 rounded-sm cursor-pointer'onClick={() => dispatch(removeWishlistItem(product.id))}>Remove </button>
+              ) : (
+                <Button onClick={() => dispatch(addWishlistItem(product.id))}>Add to wishlist</Button>
+              )}
             </span>
         </div>
     );
