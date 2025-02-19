@@ -5,6 +5,7 @@ import App from './App.tsx'
 import Login from './pages/Login.tsx'
 import { store } from './state/store.ts'
 import { Provider } from 'react-redux'
+import Home from './pages/Home.tsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -12,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Home</h1>
+        element: <Home/>
       },
       {
         path: '/login',

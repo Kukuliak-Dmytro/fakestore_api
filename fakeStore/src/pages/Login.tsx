@@ -3,6 +3,7 @@ import InputText from "../components/InputText";
 import { useDispatch } from "react-redux";
 import { login } from "../state/userSlice";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 export default function Login() {
     const navigate=useNavigate()
     const dispatch = useDispatch()
@@ -44,7 +45,7 @@ export default function Login() {
                 <form className="flex flex-col gap-4" onSubmit={(e) => { handleLogin(e) }}>
                     <InputText id="username" placeholder="Username" title="Username" onChange={(e) => { setLoginData({ ...loginData, username: e.target.value }) }} />
                     <InputText id="password" placeholder="Password" title="Password" type="password" onChange={(e) => { setLoginData({ ...loginData, password: e.target.value }) }}></InputText>
-                    <button className="p-2 bg-blue-500 text-white rounded cursor-pointer">Login</button>
+                    <Button type="submit" >Login</Button>
                 </form>
             </div>
         </div>
