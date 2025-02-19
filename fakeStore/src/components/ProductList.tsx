@@ -15,7 +15,7 @@ export default function ProductList({ products, itemsPerPage }: { products: Prod
     const currentProducts = products.slice(indexOfLastProduct - productsPerPage, indexOfLastProduct);
     const totalPages = Math.ceil(products.length / productsPerPage);
     const favorites = useSelector((state: RootState) => state.user.user.wishlistIds);
-
+    const favoritescopy=favorites
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -23,19 +23,19 @@ export default function ProductList({ products, itemsPerPage }: { products: Prod
         newSearchParams.set("page", currentPage.toString());
         setSearchParams(newSearchParams);
     }, [currentPage, searchParams, setSearchParams]);
-    // if (products.length === 0) {
-    //     return <div className="flex justify-center items-center h-96">Loading
-    //     </div>
-    // }
+    if (products.length === 0) {
+        return <div className="flex justify-center items-center h-96">Loading
+        </div>
+    }
     return (
         <div className="product-list-wrapper grid ">
             <div className={`flex flex-wrap gap-4 justify-center `}>
                 {currentProducts.map((product) => {
-                    if (favorites.includes(product.id)) {
-                        return <ProductCard key={product.id} product={product} dispatch={dispatch} isCurrentItemFavorited={true} />;
-                    } else {
+                    // if (favoritescopy.includes(product.id)) {
                         return <ProductCard key={product.id} product={product} dispatch={dispatch} isCurrentItemFavorited={false} />;
-                    }
+                    // } else {
+                        return <ProductCard key={product.id} product={product} dispatch={dispatch} isCurrentItemFavorited={false} />;
+                    // }
                 })}
             </div>
             <div className="navigation flex gap-4 mx-auto my-4">

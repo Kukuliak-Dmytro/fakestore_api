@@ -1,7 +1,7 @@
 import InputText from "../components/InputText";
 import Button from "../components/Button";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
+
 import { ProductType } from "../types/types";
 import ProductList from "../components/ProductList";
 
@@ -16,6 +16,7 @@ interface FilterProps {
 export default function Home() {
     const [products, setProducts] = useState<ProductType[]>([]);
     const [searchedProducts, setSearchedProducts] = useState<ProductType[]>([]);
+    const [categories, setCategories] = useState<string[]>([]);
     const [currentFilter, setCurrentFilter] = useState<FilterProps>({
         search: "",
         category: [],
@@ -64,8 +65,15 @@ export default function Home() {
                 setSearchedProducts(result); // Show all products by default
             })
             .catch((error) => console.error(error));
+        fetch("https://fakestoreapi.com/products/categories", requestOptions)
+            .then((response) => response.json())
+            .then((result) => setCategories(result))
+            .catch((error) => console.error(error));
     }, []);
 
+    // if (products.length === 0) {
+    //     return <div className="flex justify-center items-center h-96">Loading</div>;
+    // }
     return (
         <div className="home-page-wrapper w-full h-96 bg-gray-500">
             <form className="hero flex flex-col justify-center items-center h-full gap-4" onSubmit={handleSearch}>
@@ -82,11 +90,11 @@ export default function Home() {
                 <h1 className="text-3xl text-white">Welcome to FakeStore</h1>
             </form>
             <div className="results-wrapper p-30 flex">
-                <div className="filters-wrapper p-4 bg-white rounded shadow-md mr-4">
+                <div className="filters-wrapper p-4 bg-gray-100 rounded shadow-md mr-4">
                     <div className="filter w-90">
                         <div className="filter-category mb-4">
                             <h2 className="text-xl font-semibold mb-2">Filter by category</h2>
-                            {["electronics", "jewelery", "men's clothing", "women's clothing"].map((category) => (
+                            {categories.map((category) => (
                                 <div key={category} className="mb-2">
                                     <input
                                         type="checkbox"

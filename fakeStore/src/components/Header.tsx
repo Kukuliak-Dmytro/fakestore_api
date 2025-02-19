@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
 import { RootState } from "../state/store"
 export default function Header() {
-    const favorites = useSelector((state: RootState) => state.user.user.wishlistIds.length);
+    // const favorites = useSelector((state: RootState) => state.user.user?.wishlistIds?.length || 0);
+    // const favorritesCopy=favorites
     return (
         <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
             <nav className="flex justify-between items-center w-full">
@@ -12,7 +12,7 @@ export default function Header() {
                     <li><Link to='/catalog'>Catalog</Link></li>
                     <li>
                         <Link to='/wishlist'>Wishlist</Link>
-                        {favorites > 0 && <span className="bg-red-500 text-xs w-1 h-1 text-white rounded-full p-1">{favorites}</span>}
+                        {/* {favorritesCopy > 0 && <span className="bg-red-500 text-xs w-1 h-1 text-white rounded-full p-1">{favorritesCopy}</span>} */}
                         </li>
                 </ul>
                 <Link to='/login'>Login</Link>

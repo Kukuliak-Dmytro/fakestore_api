@@ -30,10 +30,11 @@ export const userSlice = createSlice({
         },
         addWishlistItem: (state, action) => {
             state.user.wishlistIds.push(action.payload);
+
             
         },
         removeWishlistItem: (state, action) => {
-            state.user.wishlistIds = state.user.wishlistIds?.filter((id) => id !== action.payload);
+            state.user.wishlistIds = state.user.wishlistIds.filter((id) => id !== action.payload);
             console.log(state.user.wishlistIds)
             
         }
