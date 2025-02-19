@@ -23,7 +23,10 @@ export default function ProductList({ products, itemsPerPage }: { products: Prod
         newSearchParams.set("page", currentPage.toString());
         setSearchParams(newSearchParams);
     }, [currentPage, searchParams, setSearchParams]);
-
+    // if (products.length === 0) {
+    //     return <div className="flex justify-center items-center h-96">Loading
+    //     </div>
+    // }
     return (
         <div className="product-list-wrapper grid ">
             <div className={`flex flex-wrap gap-4 justify-center `}>
